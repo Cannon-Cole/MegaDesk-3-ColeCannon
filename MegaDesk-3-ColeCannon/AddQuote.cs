@@ -45,10 +45,10 @@ namespace MegaDesk_3_ColeCannon
             int height;
 
             try
-            { 
-            height = System.Convert.ToInt32(HeightInput.Text);
+            {
+                height = System.Convert.ToInt32(HeightInput.Text);
             }
-            catch(FormatException)
+            catch (FormatException)
             {
                 HeightInputErrorLabel.Text = "Not integer";
                 height = 0;
@@ -59,21 +59,85 @@ namespace MegaDesk_3_ColeCannon
                 height = 0;
             }
 
-            if (height > 48)
+            if (height > Desk.MAX_HEIGHT)
             {
-                errorMessage = "Height must be less than or equal to 48";
+                errorMessage = "Height must be less than or equal to " + Desk.MAX_HEIGHT;
                 HeightInputErrorLabel.Text = errorMessage;
                 e.Cancel = true;
             }
-            else if (height < 12)
+            else if (height < Desk.MIN_HEIGHT)
             {
-                errorMessage = "Height must be greater than or equal to 12";
+                errorMessage = "Height must be greater than or equal to " + Desk.MIN_HEIGHT;
                 HeightInputErrorLabel.Text = errorMessage;
                 e.Cancel = true;
             }
             else
             {
                 HeightInputErrorLabel.Text = "";
+            }
+        }
+
+        private void WidthValidation(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Back)
+            {
+                WidthCheck(e.KeyChar);
+            }
+            else
+            {
+                WidthCheck(e.KeyChar);
+                e.Handled = true;
+            }
+
+        }
+
+        private void WidthCheck(char key)
+        {
+            string errorMessage;
+            string convert = WidthInput.Text;
+            int width;
+
+            if (char.IsControl(key))
+            {
+                WidthInput.SelectionStart = WidthInput.Text.Length;
+            }
+            else if (char.IsDigit(key))
+            {
+                convert += key;
+                WidthInput.Text = convert;
+                WidthInput.SelectionStart = WidthInput.Text.Length;
+            }
+            
+            try
+            {
+                width = System.Convert.ToInt32(WidthInput.Text);
+            }
+            catch (FormatException)
+            {
+                WidthInputErrorLabel.Text = "Not integer";
+                width = 0;
+            }
+            catch (OverflowException)
+            {
+                WidthInputErrorLabel.Text = "Too big";
+                width = 0;
+            }
+
+            if (width > Desk.MAX_WIDTH)
+            {
+                errorMessage = "Width must be less than or equal to " + Desk.MAX_WIDTH;
+                WidthInputErrorLabel.Text = errorMessage;
+
+            }
+            else if (width < Desk.MIN_WIDTH)
+            {
+                errorMessage = "Width must be greater than or equal to " + Desk.MIN_WIDTH;
+                WidthInputErrorLabel.Text = errorMessage;
+
+            }
+            else
+            {
+                WidthInputErrorLabel.Text = "";
             }
         }
     }

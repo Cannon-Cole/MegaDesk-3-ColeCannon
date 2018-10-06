@@ -117,6 +117,7 @@
             this.WidthInput.Name = "WidthInput";
             this.WidthInput.Size = new System.Drawing.Size(100, 38);
             this.WidthInput.TabIndex = 10;
+            this.WidthInput.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.WidthValidation);
             // 
             // AddQuote
             // 
