@@ -140,5 +140,20 @@ namespace MegaDesk_3_ColeCannon
                 WidthInputErrorLabel.Text = "";
             }
         }
+
+        private void HeightInput_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void HeightTitle_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
